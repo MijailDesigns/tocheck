@@ -19,7 +19,23 @@ const utils = require('../utils');
   */  
 
 const addBook = (book) => {
-  
+  const bookId = utils.books.find(b => b.id === book.id);
+
+  if(!bookId) {
+    if(book.length > 1){
+      book.forEach((b) => {
+        let findBooks = utils.books.find(c => c.id === b.id)
+
+        if(findBooks) {
+          throw ('ya esta el libro en la base de datos.');
+        }
+        utils.books.push(b);
+      });
+    } else {
+      utils.books.push (book);
+    }
+    return book;
+  }
 }
 // ⚠️ No modificar nada debajo de esta línea ⚠️
 module.exports = addBook;
