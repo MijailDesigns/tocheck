@@ -27,6 +27,20 @@ const utils = require('../utils');
    */
 const classifyBooks = () => {
    // ⚠️ No modificar nada arriba de esta línea ⚠️
+   if (utils.books.length === 0) {
+      throw ('No hay libros disponibles')
+   }
+   let clasified = {};
+   utils.books.forEach(book => {
+      if (!clasified.hasOwnProperty(book.genre)) {
+         clasified = {
+            ...clasified, [book.genre]: [book]
+         }
+      }else{
+         clasified[book.genre] = [...clasified[book.genre], book]
+      }
+   })
+   return clasified
 }
 
 //⚠️ No modificar nada debajo de esta línea ⚠️

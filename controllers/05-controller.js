@@ -16,7 +16,6 @@ const utils = require("../utils");
   */
 const takeBook = (id, quantity) => {
   // ⚠️ No modificar nada arriba de esta línea ⚠️
-  if (quantity === 5) throw new Error("La cantidad solicitada supera el stock");
   if (!quantity) throw new Error("Cantidad requerida");
   const book = utils.books.find((b) => b.id === id);
   if (!book) throw new Error("Libro no encontrado");
