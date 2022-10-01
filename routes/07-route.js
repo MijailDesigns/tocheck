@@ -11,7 +11,14 @@ const addBook = require('../controllers/01-controller')
     - Si algo falla al crear una categoría, debes responder con un status code 400 y el mensaje del error!
 */
 
-// router.post('/books', (req, res) => {})
+router.post('/books', (req, res) => {
+  try {
+    let {book} = req.body;
+    res.status(201).json({msg: addBook(book)})
+  } catch (error) {
+    res.status(400).json({err: error})
+  }
+})
 
 // No modificar nada debajo de esta línea
 module.exports = router;
