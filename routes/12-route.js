@@ -11,7 +11,16 @@ const classifyBooks = require('../controllers/06-controller')
     - Si algo falla al obtener los libros, debes responder con el status code pedido en el test con el mensaje del error!
 */
 
-// router.get('/books/classified', (req, res) => {})
+router.get('/books/classified', (req, res) => {
+  try {
+    res.status(200).json({
+      books: classifyBooks(),
+      requestDate: new Date().toLocaleDateString()
+    })
+  } catch (error) {
+    res.status(500).json({message: error})
+  }
+})
 
 // No modificar nada debajo de esta línea
 module.exports = router;

@@ -12,7 +12,23 @@ const takeBook = require('../controllers/05-controller')
     - Recordá chequear el mensaje del error y devolver la respuesta dependiendo del mismo. 
 */
 
-// router.get('/book/:id', (req, res) => {})
+router.get('/book/:id', (req, res) => {
+  const {id} = req.params;
+  const {quantity} = req.query;
+  try {
+    res.status(200).json(takeBook(id, quantity))
+  } catch (error) {
+    if (error === 'Libro no encontrado'){
+      return res.status(404).json({ message: `${error}`})
+    }
+    if (error === 'La cantidad de libros solicitados supera el stock') {
+      return res.status(400).json({message: 'La cantidad solicitada supera el stock'})
+    }
+    return res.status(400).json({message: error})
+
+  }
+
+})
 
 //No modificar nada debajo de esta linea
 module.exports = router
